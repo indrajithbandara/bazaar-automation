@@ -1,0 +1,54 @@
+CREATE DEFINER=`bazaar`@`%` PROCEDURE `init_region`(IN `in_region_id` bigint,IN `in_region_name` varchar(45))
+BEGIN
+	#Routine body goes here...
+delete from product_item_availability where region_id=in_region_id;
+delete from product_item_price where region_id=in_region_id;
+delete from product_item_relation where region_id=in_region_id;
+delete from image where region_id=in_region_id;
+delete from availability_zone where region_id=in_region_id;
+delete from region where id=in_region_id;
+
+##base info provider hardcode 1
+insert into region(id,service_provider_id,name,location_id,status) VALUES (in_region_id,1,in_region_name,1,0);
+
+## avaliablity
+
+## nio disk
+insert into product_item_availability (product_item_id,region_id,on_sale_flag,source_type) 
+select id,in_region_id,1,0 from product_item 
+where product_item_group ='103001';
+
+## public ip
+insert into product_item_availability (product_item_id,region_id,on_sale_flag,source_type) 
+select id,in_region_id,1,0 from product_item 
+where product_item_group  in ('106001','106002');
+
+## flavor
+insert into product_item_availability (product_item_id,region_id,on_sale_flag,source_type) values (1010010001,in_region_id,1,1),(1010010002,in_region_id,1,1),(1010010003,in_region_id,1,1),(1010010004,in_region_id,1,1),(1020010001,in_region_id,1,1),(1020010002,in_region_id,1,1),(1020010003,in_region_id,1,1),(1020010004,in_region_id,1,1),(1020010006,in_region_id,1,1),(1050010001,in_region_id,1,1),(1050010002,in_region_id,1,1),(1050010003,in_region_id,1,1),(1050010004,in_region_id,1,1),(1050010005,in_region_id,1,1);
+
+## lb
+insert into product_item_availability (product_item_id,region_id,on_sale_flag,source_type) values (1070010001,in_region_id,1,0),(1070010002,in_region_id,1,0);
+
+## os
+insert into product_item_availability (product_item_id,region_id,on_sale_flag,source_type) values (1040010003,in_region_id,1,0);
+
+
+## price
+insert into product_item_price (item_id,region_id,created_date) 
+select id,in_region_id,now() from product_item;
+
+## relation 
+##flavor
+insert into product_item_relation (region_id,item_id,conflict_item_id,relation_type) value (in_region_id,1020010002,1010010001,1) , (in_region_id,1020010003,1010010002,1),(in_region_id,1020010004,1010010003,1),(in_region_id,1020010006,1010010004,1),(in_region_id,1020010003,1010010002,1),(in_region_id,1020010001,1010010001,1);
+
+## os & rootdisk
+insert into product_item_relation (region_id,item_id,conflict_item_id,relation_type) value (in_region_id,1040010001,1050010002,2) , (in_region_id,1040010003,1050010005,2),(in_region_id,1040010004,1050010002,2),(in_region_id,1050010001,1040010005,2);
+
+## image 
+insert into image (uuid,region_id,name) values ('8c2b53ca-cad2-413a-b9cd-16bc7e6e4a56',in_region_id,'cirros');
+
+## az
+insert into availability_zone (zone_name,region_id) values ('AZ1',in_region_id);
+insert into availability_zone (zone_name,region_id) values ('AZ2',in_region_id);
+
+ENDs

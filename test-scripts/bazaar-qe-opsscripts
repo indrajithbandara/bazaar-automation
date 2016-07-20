@@ -1,0 +1,47 @@
+##########restart mysql rabbitmq zookeeper redis############
+ 
+1.mysql    sudo service mysql start
+ 
+2. rabbitmq
+firstlty query rabbitmq process,  ps -elf|grep rabbitmq  kill -9 rabbitmq_processid
+then  /usr/lib/rabbitmq/bin    ./rabbitmq-server start &  ,wait for 6 plugging show, that ok.
+finally access mq ui  10.33.206.13:15672
+ 
+3.redis
+  cd /usr/bin/    ./redis-server &  --------------qe2 env redis
+  cd /opt/redis-3.0.0/src   ./redis-server &     --------------qe1 env redis
+ 
+4 zookeeper
+   cd /usr/share/zookeeper/bin     ./zkServer.sh start &     and  ./zkServer.sh status to check zk status on qe 2 ------------qe2 env
+   cd /opt/zookeeper-3.4.6/bin    ./zkServer.sh start &  and  ./zkServer.sh status to check zk status on qe 1 ------------qe1 env
+ 
+##############restart apache  tomcat  bazaar-sa#################
+1. apache restart
+    cd /var/www/html     ./replaceFile2BazaarWeb.sh
+2. tomcat restart
+    ps -lef|grep tomcat   kill -9  tomcatprocessid 
+                cd /opt/apache-tomcat-bazaar/bin    ./startup.sh &
+3. bazaar-sa restart
+    ps -lef|grep bazaar-sa   kill -9  bazaar-sa-processid
+    cd /opt/bazaar/sa/   sudo ./start.sh & ------qe2 ubuntu env
+                cd /opt/golangserver/bin/   sudo ./start.sh &      ------qe1 centos env
+ 
+ufw allow some ubuntu configs
+cd /var/www/html   ./healthCheck.sh   -----qe2 ubuntu need excutes this shell scripts   qe1 don't need excute that
+ 
+notes: QE 1  do not include mysql service . qe1 mysql is 10.33.206.11   ,  QE2 is allinone , all service has been inclued.
+fianlly check netstat -ntlp  all ports 
+redis --- 6379
+zk --- 2181
+rabbitmq  --- 15672
+mysql --- 3306
+Apache ---80
+Tomcat ---8090
+ 
+QE1 TOMCAT http://10.33.206.10:8090/manager/html  tomcat/tomcat
+    Bazaar-web  http://10.33.206.10
+                Bzaar-Admin http://10.33.206.10:8190
+ 
+QE2 TOMCAT http://10.33.206.13:8090/manager/html tomcat/tomcat
+    Bazaar-web  http://10.33.206.13
+    Bzaar-Admin http://10.33.206.13:8190

@@ -1,0 +1,11 @@
+#bug management and track
+1. zentao, or bugfree,testlink etc.
+2. RTC, or Jira 
+
+
+#########Bazaar Bug Management###########
+1. Zentao Bugfree system  400-500 bugs.
+2. Jira Buglists  200-300 bugs.
+
+https://jira.hpcloud.net/browse/BAZ-311?filter=30485&jql=project%20%3D%20BAZ%20AND%20issuetype%20%3D%20Bug%20AND%20status%20in%20(%22In%20Progress%22%2C%20Reopened%2C%20Resolved%2C%20%22To%20Do%22)%20AND%20Sprint%20%3D%201726
+

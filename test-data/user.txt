@@ -1,0 +1,71 @@
+zhangsan
+lisi
+wangwus
+
+        try:
+            file=open('C:/edaixi_testdata/userdata_ops.txt','r')
+        except IOError:
+            print "The file don't exsit,please check it."
+            exit()
+        for line in file.readlines():
+            lineone=line.split()
+            print lineone[0]           
+            print lineone[1]
+            print lineone[2]
+            print lineone[3]
+
+        try:
+            file=open('C:/edaixi_testdata/userdata_ops.txt','r')
+        except IOError:
+            print "The file don't exsit,please check it."
+            exit()
+        for line in file.readlines():
+            lineone=line.split()
+            print lineone[0]           
+            print lineone[1]
+            print lineone[2]
+            print lineone[3]
+
+        try:
+            file=open('C:/edaixi_testdata/userdata_ops.txt','r')
+        except IOError:
+            print "The file don't exsit,please check it."
+            exit()
+        for line in file.readlines():
+            lineone=line.split()
+            print lineone[0]           
+            print lineone[1]
+            print lineone[2]
+            uploadfile=lineone[3]
+            uploadcode=lineone[4]
+            print uploadfile  
+            print uploadcode
+
+
+        try:
+            file=open('C:/edaixi_testdata/userdata_ops.txt','r')
+        except IOError:
+            print "The file don't exsit,please check it."
+            exit()
+        for line in file.readlines():
+            lineone=line.split()
+            print lineone[0]           
+            print lineone[1]
+            print lineone[2]
+            print lineone[3]
+            print lineone[5]
+            print lineone[6]
+
+
+
+        try:
+            file=open('C:/edaixi_testdata/userdata_ops.txt','r')
+        except IOError:
+            print "The file don't exsit,please check it."
+            exit()
+        for line in file.readlines():
+            lineone=line.split()
+            print lineone[0]           
+            print lineone[1]
+            print lineone[2]
+            print lineone[3]

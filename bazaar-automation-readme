@@ -1,0 +1,8 @@
+# excute methods 
+
+cd /c/BazaarCodeDeveloper/bazaarworkspace/bazaar-automation/src/bazaar_webmarketplace
+
+1. python testsuit_ui_bazaar_marketplace.py
+2. IDE Run testsuit_ui_bazaar_marketplace.py
+3. Jenkins run
+4. linux headless run
