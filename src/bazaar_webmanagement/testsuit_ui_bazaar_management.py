@@ -38,7 +38,7 @@ if __name__ == '__main__':
     fp = file("C:\\BazaarCodeDeveloper\\bazaarworkspace\\bazaar-automation\\test-report\\"+currenttime+"bazaar_management_test_report.html", 'wb')
     #fp = file("c:\\edaixi_testdata\\20150717caiwu_test_report.html", 'wb')
 
-    htmlRunner= HTMLTestRunner.HTMLTestRunner(stream=fp,title="HPE Cloud Bazaar Management testing result",description="20160708 luke")
+    htmlRunner= HTMLTestRunner.HTMLTestRunner(stream=fp,title="HPE Cloud Bazaar Management testing result",description="20160708 luke (contact mail:jun.cui@hpe.com)")
     #suite =  unittest.TestLoader().loadTestsFromTestCase(MyTest)  
     htmlRunner.run(suite)
     fp.close()
